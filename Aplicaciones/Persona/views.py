@@ -68,3 +68,8 @@ def eliminar_persona(request, pk):
     else:
         ruta_archivo = persona.foto_perfil.path if persona.foto_perfil else None
         persona.delete()
+        if ruta_archivo and os.path.isfile(ruta_archivo):
+            try:
+                os.remove(ruta_archivo)
+            except OSError:
+                pass
