@@ -64,3 +64,7 @@ def actualizar_mascota(request, pk):
                 pass
         messages.success(request, 'Mascota actualizada correctamente.')
     return redirect('listaMascota')
+
+
+def eliminar_mascota(request, pk):
+    mascota = get_object_or_404(Mascota, pk=pk)
