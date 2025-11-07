@@ -41,3 +41,26 @@ def guardar_mascota(request):
 def editar_mascota(request, pk):
     mascota = get_object_or_404(Mascota, pk=pk)
     return render(request, 'Mascota/editarMascota.html', {'mascota': mascota})
+
+
+def actualizar_mascota(request, pk):
+    mascota = get_object_or_404(Mascota, pk=pk)
+    if request.method == 'POST':
+        ruta_anterior = mascota.foto_perfil.path if mascota.foto_perfil else None
+        mascota.nombre = request.POST.get('nombre')
+        mascota.especie = request.POST.get('especie')
+        mascota.raza = request.POST.get('raza')
+        mascota.edad = request.POST.get('edad')
+        mascota.fecha_nacimiento = request.POST.get('fecha_nacimiento') or None
+        mascota.descripcion = request.POST.get('descripcion')
+        foto_perfil = request.FILES.get('foto_perfil')
+        if foto_perfil:
+            mascota.foto_perfil = foto_perfil
+        mascota.save()
+        if foto_perfil and ruta_anterior and os.path.isfile(ruta_anterior):
+            try:
+                os.remove(ruta_anterior)
+            except OSError:
+                pass
+        messages.success(request, 'Mascota actualizada correctamente.')
+    return redirect('listaMascota')
