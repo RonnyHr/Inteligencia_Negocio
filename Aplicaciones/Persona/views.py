@@ -48,3 +48,6 @@ def actualizar_persona(request, pk):
         persona.direccion = request.POST.get('direccion')
         persona.telefono = request.POST.get('telefono')
         persona.correo = request.POST.get('correo')
+        foto_perfil = request.FILES.get('foto_perfil')
+        if foto_perfil:
+            persona.foto_perfil = foto_perfil
