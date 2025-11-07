@@ -103,3 +103,10 @@ def eliminar_adopcion(request, pk):
             pass
     messages.success(request, 'Solicitud de adopción eliminada correctamente.')
     return redirect('listaAdopcion')
+
+
+def analisis_adopciones(request):
+    total_mascotas = Mascota.objects.count()
+    total_personas = Persona.objects.count()
+    total_adopciones = Adopcion.objects.count()
+    mascotas_disponibles = Mascota.objects.filter(adopciones__isnull=True).count()
