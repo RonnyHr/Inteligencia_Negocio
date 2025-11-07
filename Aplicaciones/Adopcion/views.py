@@ -40,3 +40,13 @@ def guardar_adopcion(request):
         if Adopcion.objects.filter(mascota=mascota).exists():
             messages.error(request, 'La mascota seleccionada ya cuenta con una solicitud de adopción.')
             return redirect('nuevaAdopcion')
+        
+        Adopcion.objects.create(
+            mascota=mascota,
+            persona=persona,
+            estado=estado,
+            observaciones=observaciones,
+            documento_pdf=documento_pdf,
+        )
+        messages.success(request, 'Solicitud de adopción registrada correctamente.')
+    return redirect('nuevaAdopcion')
