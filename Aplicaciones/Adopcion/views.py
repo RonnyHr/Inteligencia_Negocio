@@ -110,3 +110,7 @@ def analisis_adopciones(request):
     total_personas = Persona.objects.count()
     total_adopciones = Adopcion.objects.count()
     mascotas_disponibles = Mascota.objects.filter(adopciones__isnull=True).count()
+
+    estado_qs = Adopcion.objects.values('estado').annotate(total=Count('id')).order_by('estado')
+    estado_labels = [item['estado'] for item in estado_qs]
+    estado_data = [item['total'] for item in estado_qs]
