@@ -12,3 +12,6 @@ def lista_persona(request):
 
 def nueva_persona(request):
     return render(request, 'Persona/agregarPersona.html')
+
+def guardar_persona(request):
+    if request.method == 'POST':
