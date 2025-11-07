@@ -90,3 +90,9 @@ def actualizar_adopcion(request, pk):
                 pass
         messages.success(request, 'Solicitud de adopción actualizada correctamente.')
     return redirect('editarAdopcion', pk=adopcion.pk)
+
+
+def eliminar_adopcion(request, pk):
+    adopcion = get_object_or_404(Adopcion, pk=pk)
+    ruta_archivo = adopcion.documento_pdf.path if adopcion.documento_pdf else None
+    adopcion.delete()
