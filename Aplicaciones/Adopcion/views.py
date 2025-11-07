@@ -114,3 +114,15 @@ def analisis_adopciones(request):
     estado_qs = Adopcion.objects.values('estado').annotate(total=Count('id')).order_by('estado')
     estado_labels = [item['estado'] for item in estado_qs]
     estado_data = [item['total'] for item in estado_qs]
+
+    mensual_qs = (
+        Adopcion.objects.annotate(mes=TruncMonth('fecha_solicitud'))
+        .values('mes')
+        .annotate(total=Count('id'))
+        .order_by('mes')
+    )
+    mensual_labels = [
+        item['mes'].strftime('%B %Y') if item['mes'] else 'Sin fecha'
+        for item in mensual_qs
+    ]
+    mensual_data = [item['total'] for item in mensual_qs]
