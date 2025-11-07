@@ -51,3 +51,9 @@ def actualizar_persona(request, pk):
         foto_perfil = request.FILES.get('foto_perfil')
         if foto_perfil:
             persona.foto_perfil = foto_perfil
+        persona.save()
+        if foto_perfil and ruta_anterior and os.path.isfile(ruta_anterior):
+            try:
+                os.remove(ruta_anterior)
+            except OSError:
+                pass
