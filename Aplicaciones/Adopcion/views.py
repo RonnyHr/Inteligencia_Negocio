@@ -83,3 +83,10 @@ def actualizar_adopcion(request, pk):
         if documento_pdf:
             adopcion.documento_pdf = documento_pdf
         adopcion.save()
+        if documento_pdf and ruta_anterior and os.path.isfile(ruta_anterior):
+            try:
+                os.remove(ruta_anterior)
+            except OSError:
+                pass
+        messages.success(request, 'Solicitud de adopción actualizada correctamente.')
+    return redirect('editarAdopcion', pk=adopcion.pk)
