@@ -59,3 +59,7 @@ def actualizar_persona(request, pk):
                 pass
         messages.success(request, 'Persona actualizada correctamente.')
     return redirect('listaPersona')
+
+
+def eliminar_persona(request, pk):
+    persona = get_object_or_404(Persona, pk=pk)
