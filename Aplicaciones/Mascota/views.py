@@ -73,3 +73,10 @@ def eliminar_mascota(request, pk):
     else:
         ruta_archivo = mascota.foto_perfil.path if mascota.foto_perfil else None
         mascota.delete()
+        if ruta_archivo and os.path.isfile(ruta_archivo):
+            try:
+                os.remove(ruta_archivo)
+            except OSError:
+                pass
+        messages.success(request, 'Mascota eliminada correctamente.')
+    return redirect('listaMascota')
