@@ -75,3 +75,8 @@ def actualizar_adopcion(request, pk):
         if Adopcion.objects.filter(mascota=mascota).exclude(pk=adopcion.pk).exists():
             messages.error(request, 'La mascota seleccionada ya cuenta con una solicitud de adopción.')
             return redirect('editarAdopcion', pk=adopcion.pk)
+        adopcion.mascota = mascota
+        adopcion.persona = get_object_or_404(Persona, pk=persona_id)
+        adopcion.estado = request.POST.get('estado')
+        adopcion.observaciones = request.POST.get('observaciones')
+        documento_pdf = request.FILES.get('documento_pdf')
