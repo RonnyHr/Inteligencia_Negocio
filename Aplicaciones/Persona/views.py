@@ -32,3 +32,8 @@ def guardar_persona(request):
         )
         messages.success(request, 'Persona registrada correctamente.')
     return redirect('listaPersona')
+
+
+def editar_persona(request, pk):
+    persona = get_object_or_404(Persona, pk=pk)
+    return render(request, 'Persona/editarPersona.html', {'persona': persona})
