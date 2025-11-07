@@ -126,3 +126,7 @@ def analisis_adopciones(request):
         for item in mensual_qs
     ]
     mensual_data = [item['total'] for item in mensual_qs]
+
+    adopcion_vs_disponibles_labels = ['Mascotas adoptadas', 'Mascotas disponibles']
+    mascotas_adoptadas = total_adopciones
+    adopcion_vs_disponibles_data = [mascotas_adoptadas, mascotas_disponibles]
