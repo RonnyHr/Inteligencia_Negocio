@@ -30,3 +30,5 @@ def guardar_persona(request):
             correo=correo,
             foto_perfil=foto_perfil,
         )
+        messages.success(request, 'Persona registrada correctamente.')
+    return redirect('listaPersona')
