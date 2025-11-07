@@ -42,3 +42,9 @@ def editar_persona(request, pk):
 def actualizar_persona(request, pk):
     persona = get_object_or_404(Persona, pk=pk)
     if request.method == 'POST':
+        ruta_anterior = persona.foto_perfil.path if persona.foto_perfil else None
+        persona.nombres = request.POST.get('nombres')
+        persona.apellidos = request.POST.get('apellidos')
+        persona.direccion = request.POST.get('direccion')
+        persona.telefono = request.POST.get('telefono')
+        persona.correo = request.POST.get('correo')
