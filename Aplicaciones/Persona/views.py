@@ -57,3 +57,5 @@ def actualizar_persona(request, pk):
                 os.remove(ruta_anterior)
             except OSError:
                 pass
+        messages.success(request, 'Persona actualizada correctamente.')
+    return redirect('listaPersona')
