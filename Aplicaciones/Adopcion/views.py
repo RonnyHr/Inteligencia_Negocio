@@ -36,3 +36,7 @@ def guardar_adopcion(request):
 
         mascota = get_object_or_404(Mascota, pk=mascota_id)
         persona = get_object_or_404(Persona, pk=persona_id)
+
+        if Adopcion.objects.filter(mascota=mascota).exists():
+            messages.error(request, 'La mascota seleccionada ya cuenta con una solicitud de adopción.')
+            return redirect('nuevaAdopcion')
