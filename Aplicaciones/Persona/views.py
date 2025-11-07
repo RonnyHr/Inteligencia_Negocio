@@ -73,3 +73,5 @@ def eliminar_persona(request, pk):
                 os.remove(ruta_archivo)
             except OSError:
                 pass
+        messages.success(request, 'Persona eliminada correctamente.')
+    return redirect('listaPersona')
