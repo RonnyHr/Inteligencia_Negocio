@@ -68,3 +68,8 @@ def actualizar_mascota(request, pk):
 
 def eliminar_mascota(request, pk):
     mascota = get_object_or_404(Mascota, pk=pk)
+    if mascota.adopciones.exists():
+        messages.error(request, 'No se puede eliminar la mascota porque está asociada a solicitudes de adopción.')
+    else:
+        ruta_archivo = mascota.foto_perfil.path if mascota.foto_perfil else None
+        mascota.delete()
