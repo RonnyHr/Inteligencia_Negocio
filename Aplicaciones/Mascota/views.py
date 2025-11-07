@@ -36,3 +36,8 @@ def guardar_mascota(request):
         )
         messages.success(request, 'Mascota registrada correctamente.')
     return redirect('listaMascota')
+
+
+def editar_mascota(request, pk):
+    mascota = get_object_or_404(Mascota, pk=pk)
+    return render(request, 'Mascota/editarMascota.html', {'mascota': mascota})
