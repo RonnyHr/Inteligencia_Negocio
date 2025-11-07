@@ -130,3 +130,15 @@ def analisis_adopciones(request):
     adopcion_vs_disponibles_labels = ['Mascotas adoptadas', 'Mascotas disponibles']
     mascotas_adoptadas = total_adopciones
     adopcion_vs_disponibles_data = [mascotas_adoptadas, mascotas_disponibles]
+
+    context = {
+        'totales_labels': ['Mascotas', 'Personas', 'Adopciones'],
+        'totales_data': [total_mascotas, total_personas, total_adopciones],
+        'estado_labels': estado_labels,
+        'estado_data': estado_data,
+        'mensual_labels': mensual_labels,
+        'mensual_data': mensual_data,
+        'disponibles_labels': adopcion_vs_disponibles_labels,
+        'disponibles_data': adopcion_vs_disponibles_data,
+    }
+    return render(request, 'Adopcion/analisis.html', context)
