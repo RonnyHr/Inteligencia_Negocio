@@ -15,3 +15,9 @@ def nueva_persona(request):
 
 def guardar_persona(request):
     if request.method == 'POST':
+        nombres = request.POST.get('nombres')
+        apellidos = request.POST.get('apellidos')
+        direccion = request.POST.get('direccion')
+        telefono = request.POST.get('telefono')
+        correo = request.POST.get('correo')
+        foto_perfil = request.FILES.get('foto_perfil')
