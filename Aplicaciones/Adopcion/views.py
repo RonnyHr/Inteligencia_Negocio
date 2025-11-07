@@ -50,3 +50,16 @@ def guardar_adopcion(request):
         )
         messages.success(request, 'Solicitud de adopción registrada correctamente.')
     return redirect('nuevaAdopcion')
+
+
+def editar_adopcion(request, pk):
+    adopcion = get_object_or_404(Adopcion, pk=pk)
+    mascotas_disponibles = Mascota.objects.filter(
+        Q(adopciones__isnull=True) | Q(pk=adopcion.mascota_id)
+    ).distinct()
+    contexto = {
+        'adopcion': adopcion,
+        'mascotas': mascotas_disponibles,
+        'personas': Persona.objects.all(),
+    }
+    return render(request, 'Adopcion/editarAdopcion.html', contexto)
