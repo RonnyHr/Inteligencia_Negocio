@@ -80,3 +80,6 @@ def actualizar_adopcion(request, pk):
         adopcion.estado = request.POST.get('estado')
         adopcion.observaciones = request.POST.get('observaciones')
         documento_pdf = request.FILES.get('documento_pdf')
+        if documento_pdf:
+            adopcion.documento_pdf = documento_pdf
+        adopcion.save()
