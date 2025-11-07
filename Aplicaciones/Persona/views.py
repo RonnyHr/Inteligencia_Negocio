@@ -63,3 +63,8 @@ def actualizar_persona(request, pk):
 
 def eliminar_persona(request, pk):
     persona = get_object_or_404(Persona, pk=pk)
+    if persona.solicitudes_adopcion.exists():
+        messages.error(request, 'No se puede eliminar la persona porque está asociada a solicitudes de adopción.')
+    else:
+        ruta_archivo = persona.foto_perfil.path if persona.foto_perfil else None
+        persona.delete()
