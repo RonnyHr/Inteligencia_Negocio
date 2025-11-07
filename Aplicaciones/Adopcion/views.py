@@ -63,3 +63,12 @@ def editar_adopcion(request, pk):
         'personas': Persona.objects.all(),
     }
     return render(request, 'Adopcion/editarAdopcion.html', contexto)
+
+
+def actualizar_adopcion(request, pk):
+    adopcion = get_object_or_404(Adopcion, pk=pk)
+    if request.method == 'POST':
+        ruta_anterior = adopcion.documento_pdf.path if adopcion.documento_pdf else None
+        mascota_id = request.POST.get('mascota')
+        persona_id = request.POST.get('persona')
+        mascota = get_object_or_404(Mascota, pk=mascota_id)
