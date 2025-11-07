@@ -96,3 +96,10 @@ def eliminar_adopcion(request, pk):
     adopcion = get_object_or_404(Adopcion, pk=pk)
     ruta_archivo = adopcion.documento_pdf.path if adopcion.documento_pdf else None
     adopcion.delete()
+    if ruta_archivo and os.path.isfile(ruta_archivo):
+        try:
+            os.remove(ruta_archivo)
+        except OSError:
+            pass
+    messages.success(request, 'Solicitud de adopción eliminada correctamente.')
+    return redirect('listaAdopcion')
