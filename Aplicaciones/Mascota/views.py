@@ -9,3 +9,7 @@ from .models import Mascota
 def lista_mascotas(request):
     mascotas = Mascota.objects.all()
     return render(request, 'Mascota/inicio.html', {'mascotas': mascotas})
+
+
+def nueva_mascota(request):
+    return render(request, 'Mascota/nuevaMascota.html')
