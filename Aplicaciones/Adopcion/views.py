@@ -10,3 +10,8 @@ from Aplicaciones.Mascota.models import Mascota
 from Aplicaciones.Persona.models import Persona
 
 from .models import Adopcion
+
+
+def lista_adopciones(request):
+    adopciones = Adopcion.objects.select_related('mascota', 'persona').all()
+    return render(request, 'Adopcion/inicio.html', {'adopciones': adopciones})
